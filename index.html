@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="style/style.css">
+    <script src="js/paper-full.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.0/howler.min.js"></script>
+    <title>Sund Game</title>
+
+    <script type="text/paperscript" canvas="myCanvas">
+        var circles = [];
+        var keyData = {
+            a : {
+                color : "aliceblue",
+                sound : new Howl({
+                    src: ['sounds/sounds/bubbles.mp3']
+                })
+            },
+            s : {
+                color : "antiquewhite",
+                sound : new Howl({
+                    src: ['sounds/sounds/clay.mp3']
+                })
+            }, 
+            d : {
+                color : "aqua",
+                sound : new Howl({
+                    src: ['sounds/sounds/confetti.mp3']
+                })
+            },
+            f : {
+                color : "aquamarine",
+                sound : new Howl({
+                    src: ['sounds/sounds/corona.mp3']
+                })
+            }, 
+            g : {
+                color : "azure",
+                sound : new Howl({
+                    src: ['sounds/sounds/dotted-spiral.mp3']
+                })
+            }, 
+            h : {
+                color : "blueviolet",
+                sound : new Howl({
+                    src: ['sounds/sounds/flash-1.mp3']
+                })
+            }, 
+            j : {
+                color : "blue",
+                sound : new Howl({
+                    src: ['sounds/sounds/flash-2.mp3']
+                })
+            }, 
+            k : {
+                color : "chartreuse",
+                sound : new Howl({
+                    src: ['sounds/sounds/flash-3.mp3']
+                })
+            }, 
+            l : {
+                color : "cadetblue",
+                sound : new Howl({
+                    src: ['sounds/sounds/glimmer.mp3']
+                })
+            }, 
+            q : {
+                color : "chocolate",
+                sound : new Howl({
+                    src: ['sounds/sounds/moon.mp3']
+                })
+            }, 
+            w : {
+                color : "darkgreen",
+                sound : new Howl({
+                    src: ['sounds/sounds/pinwheel.mp3']
+                })
+            },  
+            e : {
+                color : "darkred",
+                sound : new Howl({
+                    src: ['sounds/sounds/piston-1.mp3']
+                })
+            }, 
+            r : {
+                color : "whitesmoke",
+                sound : new Howl({
+                    src: ['sounds/sounds/piston-2.mp3']
+                })
+            }, 
+            t : {
+                color : "darkkhaki",
+                sound : new Howl({
+                    src: ['sounds/sounds/piston-3.mp3']
+                })
+            }, 
+            y : {
+                color : "darkTurquoise",
+                sound : new Howl({
+                    src: ['sounds/sounds/prism-1.mp3']
+                })
+            }, 
+            u : {
+                color : "red",
+                sound : new Howl({
+                    src: ['sounds/sounds/prism-2.mp3']
+                })
+            }, 
+            i : {
+                color : "deepskyblue",
+                sound : new Howl({
+                    src: ['sounds/sounds/prism-3.mp3']
+                })
+            }, 
+            o : {
+                color : "dimgrey",
+                sound : new Howl({
+                    src: ['sounds/sounds/splits.mp3']
+                })
+            }, 
+            p : {
+                color : "firebrick",
+                sound : new Howl({
+                    src: ['sounds/sounds/squiggle.mp3']
+                })
+            }, 
+            z : {
+                color : "forestgreen",
+                sound : new Howl({
+                    src: ['sounds/sounds/strike.mp3']
+                })
+            }, 
+            x : {
+                color : "gold",
+                sound : new Howl({
+                    src: ['sounds/sounds/suspension.mp3']
+                })
+            }, 
+            c : {
+                color : "indigo",
+                sound : new Howl({
+                    src: ['sounds/sounds/timer.mp3']
+                })
+            }, 
+            v : {
+                color : "lawngreen",
+                sound : new Howl({
+                    src: ['sounds/sounds/ufo.mp3']
+                })
+            }, 
+            b : {
+                color : "lime",
+                sound : new Howl({
+                    src: ['sounds/sounds/veil.mp3']
+                })
+            }, 
+            n : {
+                color : "maroon",
+                sound : new Howl({
+                    src: ['sounds/sounds/wipe.mp3']
+                })
+            }, 
+            m : {
+                color : "orangered",
+                sound : new Howl({
+                    src: ['sounds/sounds/zig-zag.mp3']
+                })
+            }
+
+        };
+
+        function onKeyDown(event) {
+
+            if(keyData[event.key]){
+                var maxPoint = new Point(view.size.width, view.size.height);
+                var randomPoint = Point.random();
+                var point = maxPoint * randomPoint;
+                var newCircle = new Path.Circle(point, 50);
+                circles.push(newCircle);   
+                newCircle.fillColor =  keyData[event.key].color;
+                keyData[event.key].sound.play();
+            }
+        }
+       
+        function onFrame(event){
+            for(var i=0; i<circles.length; i++){
+                circles[i].fillColor.hue += 1;
+                circles[i].scale(.93);
+            }
+        }
+
+    </script>
+</head> 
+<body>
+
+    <canvas id="myCanvas" resize></canvas>
+</body>
+</html>
